@@ -1,0 +1,26 @@
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Godot 4+ (project-local cache; also ignored under subfolders)
+**/.godot/
+
+# Godot 3 legacy import cache
+**/.import/
+
+# Exports
+export.cfg
+export_presets.cfg
+*.translation
+
+# Mono / C#
+.mono/
+data_*/
+mono_crash.*.json

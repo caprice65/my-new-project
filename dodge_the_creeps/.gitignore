@@ -1,2 +1,13 @@
-.import
+# Godot 4+ editor & import cache
+.godot/
+
+# Godot 3 legacy
+.import/
 logs/
+
+# Local export settings (may contain machine-specific paths)
+export.cfg
+export_presets.cfg
+
+# Generated translation binaries
+*.translation
