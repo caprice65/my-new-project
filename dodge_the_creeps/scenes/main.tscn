@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bggkaprn62fwm"]
 
-[ext_resource type="Script" uid="uid://c4wt6ace7hycd" path="res://scripts/main.gd" id="1_0r6n5"]
-[ext_resource type="PackedScene" uid="uid://cao351pllxqpa" path="res://scenes/mob.tscn" id="2_50pww"]
-[ext_resource type="PackedScene" uid="uid://bwhlkliwp13p4" path="res://scenes/player.tscn" id="3_veqnc"]
-[ext_resource type="PackedScene" uid="uid://b0efehuavobda" path="res://scenes/hud.tscn" id="4_0qnje"]
-[ext_resource type="Script" uid="uid://cfputwrhxiaoj" path="res://scripts/mob_spawner.gd" id="7_spawner"]
+[ext_resource type="Script" uid="uid://c4wt6ace7hycd" path="res://scripts/game/main.gd" id="1_0r6n5"]
+[ext_resource type="PackedScene" uid="uid://cao351pllxqpa" path="res://scenes/actors/mob.tscn" id="2_50pww"]
+[ext_resource type="PackedScene" uid="uid://bwhlkliwp13p4" path="res://scenes/actors/player.tscn" id="3_veqnc"]
+[ext_resource type="PackedScene" uid="uid://b0efehuavobda" path="res://scenes/ui/hud.tscn" id="4_0qnje"]
+[ext_resource type="Script" uid="uid://cfputwrhxiaoj" path="res://scripts/game/mob_spawner.gd" id="7_spawner"]
 
 [sub_resource type="Curve2D" id="1"]
 _data = {
@@ -37,7 +37,7 @@ curve = SubResource("1")
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobSpawner/MobPath"]
 
-[node name="MobContainer" type="Node" parent="MobSpawner"]
+[node name="MobContainer" type="Node2D" parent="MobSpawner"]
 
 [node name="ScoreTimer" type="Timer" parent="."]
 

@@ -1,33 +1,75 @@
 # Dodge the Creeps
 
-This is a simple game where your character must move
-and avoid the enemies for as long as possible.
+Based on the official Godot tutorial
+["Your first 2D game"](https://docs.godotengine.org/en/latest/getting_started/first_2d_game/index.html),
+extended for practice (state machine, object pool, pause, virtual joystick, etc.).
 
-This is a finished version of the game featured in the
-["Your first 2D game"](https://docs.godotengine.org/en/latest/getting_started/first_2d_game/index.html)
-tutorial in the documentation. For more details,
-consider following the tutorial in the documentation.
+- **Engine:** Godot 4.7 (Compatibility renderer)
+- **Language:** GDScript
+- **Main scene:** `res://scenes/main.tscn`
 
-Language: GDScript
+## Directory layout
 
-Renderer: Compatibility
+```
+dodge_the_creeps/
+├── project.godot
+├── scenes/
+│   ├── main.tscn              # game root / orchestration
+│   ├── actors/                # gameplay entities
+│   │   ├── player.tscn
+│   │   └── mob.tscn
+│   ├── ui/
+│   │   └── hud.tscn
+│   └── systems/
+│       └── audio_manager.tscn # Autoload scene
+├── scripts/
+│   ├── core/                  # Autoload logic / shared services
+│   │   ├── game_state.gd      # class_name GameState → GameState.instance
+│   │   └── audio_manager.gd   # class_name AudioManager → AudioManager.instance
+│   ├── game/                  # gameplay
+│   │   ├── main.gd
+│   │   ├── player.gd
+│   │   ├── mob.gd
+│   │   └── mob_spawner.gd
+│   └── ui/
+│       ├── hud.gd
+│       └── virtual_joystick.gd
+├── art/                       # sprites
+├── audio/                     # music / sfx
+├── fonts/
+└── screenshots/
+```
 
-> [!NOTE]
->
-> There is a C# version available [here](https://github.com/godotengine/godot-demo-projects/tree/master/mono/dodge_the_creeps).
+## Architecture (where to change what)
 
-Check out this demo on the Asset Store: https://store.godotengine.org/asset/godot-foundation/dodge-the-creeps-demo/
+| Concern | Touch these |
+|---------|-------------|
+| Score / pause / high score / round flow | `scripts/core/game_state.gd`, `scripts/game/main.gd` |
+| Player move / hit | `scripts/game/player.gd`, `scenes/actors/player.tscn` |
+| Spawn / difficulty / pool | `scripts/game/mob_spawner.gd`, `scripts/game/mob.gd` |
+| HUD / pause UI / stick | `scripts/ui/*`, `scenes/ui/hud.tscn` |
+| Music / death SFX | `scripts/core/audio_manager.gd`, `scenes/systems/audio_manager.tscn` |
+| Input map | `project.godot` → `[input]` |
 
-## Screenshots
+### Autoloads
 
-![GIF from the documentation](https://docs.godotengine.org/en/latest/_images/dodge_preview.gif)
+Registered in `project.godot` as:
 
-![Screenshot](screenshots/dodge.png)
+- `GameStateAutoload` → `scripts/core/game_state.gd`
+- `AudioManagerAutoload` → `scenes/systems/audio_manager.tscn`
 
-## License
+Use **`GameState.instance`** / **`AudioManager.instance`** in code (avoids Autoload name clashes with `class_name`).
 
-`audio/House In a Forest Loop.ogg` Copyright &copy; 2012 [HorrorPen](https://opengameart.org/users/horrorpen), [CC-BY 3.0: Attribution](https://creativecommons.org/licenses/by/3.0/). Source: https://opengameart.org/content/loop-house-in-a-forest
+## Controls
 
-Images are from "Abstract Platformer". Created in 2016 by kenney.nl, [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/). Source: https://www.kenney.nl/assets/abstract-platformer
+| Action | Default |
+|--------|---------|
+| Move | WASD / arrows / stick / on-screen joystick |
+| Start | Enter / Space / Start button |
+| Pause | Esc / P / Pause button |
 
-Font is "Xolonium". Copyright &copy; 2011-2016 Severin Meyer <sev.ch@web.de>, with Reserved Font Name Xolonium, SIL open font license version 1.1. Details are in `fonts/LICENSE.txt`.
+## License / assets
+
+`audio/house_in_a_forest_loop.ogg` Copyright © 2012 [HorrorPen](https://opengameart.org/users/horrorpen), [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/).  
+Images from kenney.nl “Abstract Platformer”, [CC0](https://creativecommons.org/publicdomain/zero/1.0/).  
+Font “Xolonium” — see `fonts/LICENSE.txt`.

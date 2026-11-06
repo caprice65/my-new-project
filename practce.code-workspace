@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "name": "repo",
+      "path": "."
+    },
+    {
+      "name": "dodge_the_creeps",
+      "path": "dodge_the_creeps"
+    }
+  ],
+  "settings": {
+    "godotTools.editorPath.godot4": "f:\\tools\\Godot\\Godot_v4.7.2-stable_win64.exe"
+  }
+}
